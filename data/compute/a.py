@@ -3,7 +3,7 @@ compute_datas = {'servers': [{'OS-EXT-STS:task_state': None, 'addresses': {'self
 flavor_datas = {'flavors': [{'id': '0', 'links': [{'href': 'http://192.168.4.202:8774/v2.1/flavors/0', 'rel': 'self'}, {'href': 'http://192.168.4.202:8774/flavors/0', 'rel': 'bookmark'}], 'name': 'm1.small'}]}
 
 
-terraform_data = [{
+aterraform_data = [{
       "mode": "data",
       "type": "openstack_compute_instance_v2",
       "name": "basic",
@@ -24,6 +24,28 @@ terraform_data = [{
       }for data in compute_datas['servers']]
 }]
 
+data_set = {
+  "mode": "data",
+  "type": "openstack_compute_instance_v2",
+  "name": "basic",
+  "provider": "provider.openstack",
+  "instances" : [{
+      "status" : data['status'],
+      "attributes" : {
+          "id" : data['id'],
+          "name" : data['name'],
+          "network" : data['addresses'],
+          "key_pair" : data['key_name'],
+          "availability_zone" : data['OS-EXT-AZ:availability_zone'],
+          "security_groups" : data['security_groups'],
+          "block_device" : [],
+          "flavor_id" : data['flavor'],
+          "created" : data['created'],
+      }
 
-print(terraform_data)
+  }for data in compute_datas['servers']]
+}
+
+print(data_set)
+#print(terraform_data)
 
