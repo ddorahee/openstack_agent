@@ -35,7 +35,6 @@ def data_all(api_dict) :
     make_terraform_provider(OS_TOKEN, OS_AUTH_URL)
     print("Complete terraform openstack provider")
     print("Get Compute Data")
-    
     compute = get_compute_data(OS_PROJECT_DOMAIN_ID, OS_USERNAME, OS_PASSWORD, OS_ADMIN_ID, OS_AUTH_URL, OS_TOKEN)
     print("Complete Compute Data")
     

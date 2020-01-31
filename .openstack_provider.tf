@@ -1,0 +1,4 @@
+provider "openstack" {
+	auth_url="http://192.168.4.202:5000"
+	token="gAAAAABeNDuxSlyLp0e_nl1GioCC841CV3xyn1gAtoYM_XGOMfqUJtjirLs8tRoUE6UoIOy4bkAZzzwWeChEviH0D2hy_ny6tjs081pjPRTE5D6BSLSLRItLZzkoXsw3aq1a5F0OK7KBkbzETUtH6Uc-frqQEe7y77PILRlXOzVPZ3tUeXmpGkc"
+}
