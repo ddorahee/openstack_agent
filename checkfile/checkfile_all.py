@@ -9,7 +9,9 @@ def get_keystone_check() :
 
 def get_neutron_check() : 
     print("Neutron Check")
-    neutorn=neutron_checklist()
+    neutron=neutron_checklist()
+
+    return neutron
 
 def get_cinder_check() : 
     print("Cinder Check")
@@ -17,10 +19,18 @@ def get_cinder_check() :
 def get_swift_check() : 
     print("Swift Check")
 
-def check_all_file() : 
+def check_all_file() :
+    check_file = {
+        "Nova": [],
+        "Neutron": [],
+    } 
     print("All File Check")
     get_nova_check()
     get_keystone_check()
-    get_neutron_check()
+    neutron=get_neutron_check()
     get_cinder_check()
     get_swift_check()
+
+    check_file['Neutron'].append(neutron)
+
+    return check_file

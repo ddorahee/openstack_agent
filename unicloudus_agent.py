@@ -32,11 +32,11 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
-                self.wfile.write(str("asd").encode())
+                self.wfile.write(str(openstack_checklist).encode())
 
 httpd = socketserver.ThreadingTCPServer(('', PORT), CustomHandler)
 
-print("Unicloudus Agent Start port" + str(PORT))
+print("Unicloudus Agent Start port " + str(PORT))
 try:
     httpd.serve_forever()
 except KeyboardInterrupt:
