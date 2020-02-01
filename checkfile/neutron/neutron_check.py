@@ -1,7 +1,10 @@
+import subprocess
+
 def neutron_checklist() :
-    f = open("/etc/neutron/neutron.conf", "r")
-    lines=f.readline()
-    for line in lines :
-        if line == "" :
-            pass
- 
+    result = subprocess.run(["cat","/etc/neutron/neutron.conf"], stdout=subprocess.PIPE)
+    neutron_conf = result.stdout.decode("UTF-8")
+
+    if "auth_url" in neutron_conf :
+        print("asd")
+
+

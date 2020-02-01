@@ -3,13 +3,13 @@ from .neutron.neutron_check import neutron_checklist
 
 def get_nova_check() : 
     print("Nova Check")
-    a=nova_checklist()
-    print(a)
+    nova=nova_checklist()
 def get_keystone_check() : 
     print("Keystone Check")
 
 def get_neutron_check() : 
     print("Neutron Check")
+    neutorn=neutron_checklist()
 
 def get_cinder_check() : 
     print("Cinder Check")
