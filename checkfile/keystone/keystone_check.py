@@ -29,11 +29,10 @@ def keystone_ower_check(keystone_ower) :
         print("root ower")
 
 def keystone_checklist() :
-    pass
-#    result = subprocess.run(["./keystone_ower_check.sh"], stdout=subprocess.PIPE)
-#    keystone_ower = result.stdout.decode("UTF-8")
+    result = subprocess.run(["./keystone_ower_check.sh"], stdout=subprocess.PIPE)
+    keystone_ower = result.stdout.decode("UTF-8")
 
 #    keystone_ower_check(keystone_ower)
 
-keystone_checklist()
+#keystone_checklist()
  

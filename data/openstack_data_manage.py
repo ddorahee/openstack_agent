@@ -19,14 +19,14 @@ def create_credentials_token(key) :
 
 
 def openstack_data_all(key) :
-    path = os.path.dirname(os.path.abspath('.')) + "./data/terraform_openstack/"
+    path = os.path.dirname(os.path.abspath('.')) + "/data/terraform_openstack/" 
     print("GET Openstack All data")
     OS_TOKEN = create_credentials_token(key)
     print("Create terraform openstack provider")
-    Terraform.make_terraform_provider(path+"compute/",key['OS_AUTH_URL'],OS_TOKEN)
-    Terraform.make_terraform_provider (path + "network/", key['OS_AUTH_URL'], OS_TOKEN)
-    Terraform.make_terraform_provider (path + "database/", key['OS_AUTH_URL'], OS_TOKEN)
-    Terraform.make_terraform_provider (path + "storage/", key['OS_AUTH_URL'], OS_TOKEN)
+    Terraform.make_terraform_provider (path + "compute/", key, OS_TOKEN)
+    Terraform.make_terraform_provider (path + "network/", key, OS_TOKEN)
+    Terraform.make_terraform_provider (path + "database/", key, OS_TOKEN)
+    Terraform.make_terraform_provider (path + "storage/", key, OS_TOKEN)
 
     print("Complete terraform openstack provider")
     print("Get Compute Data")
