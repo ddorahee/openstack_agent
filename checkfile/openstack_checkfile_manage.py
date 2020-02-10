@@ -1,7 +1,7 @@
-from nova.nova_check import nova_checklist
-from neutron.neutron_check import neutron_checklist
-from keystone.keystone_check import keystone_checklist
-from horizon.horizon_check import horizon_checklist
+from checkfile.nova.nova_check import nova_checklist
+from checkfile.neutron.neutron_check import neutron_checklist
+from checkfile.keystone.keystone_check import keystone_checklist
+from checkfile.horizon.horizon_check import horizon_checklist
 
 
 def get_nova_check() :
@@ -48,7 +48,7 @@ def get_horizon_check() :
     print("----------------------\n")
 
 
-def check_all_file() :
+def openstack_check_all_file() :
     check_file = {
         "Nova": [],
         "Neutron": [],

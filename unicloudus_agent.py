@@ -1,10 +1,9 @@
 import http.server
 import socketserver
 import re
-import time
 import ast
-import checkfile.checkfile_all as checkfile_all
-import data.data_all as data_all
+from checkfile.openstack_checkfile_manage import openstack_check_all_file
+from data.openstack_data_manage import openstack_data_all
 
 
 PORT = 35358
@@ -21,14 +20,14 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             body = ast.literal_eval(post_body.decode('utf-8'))
  
             if resource == "data" : 
-                openstack_data = data_all.data_all(body)
+                openstack_data = openstack_data_all(body)
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
                 self.wfile.write(str(openstack_data).encode())
 
             elif resource == "checklist" :
-                openstack_checklist = checkfile_all.check_all_file() 
+                openstack_checklist = openstack_check_all_file()
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
