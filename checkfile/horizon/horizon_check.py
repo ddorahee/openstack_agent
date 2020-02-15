@@ -65,9 +65,9 @@ def horizon_conf_check(horizon_conf) :
     else :
         print("h")
 
-def horizon_checklist() :
-    result = subprocess.run(["./checkfile/horizon/horizon_conf_check.sh"], stdout=subprocess.PIPE)
-    result2 = subprocess.run(["./checkfile/horizon/horizon_right_check.sh"], stdout=subprocess.PIPE)
+def horizon_checklist(path) :
+    result = subprocess.run([path + "/horizon_conf_check.sh"], stdout=subprocess.PIPE)
+    result2 = subprocess.run([path +" /horizon_right_check.sh"], stdout=subprocess.PIPE)
     horizon_conf = result.stdout.decode("UTF-8")
     horizon_right = result2.stdout.decode("UTF-8")
     horizon_conf = horizon_conf.upper().replace(" ", "")

@@ -1,4 +1,6 @@
 import subprocess
+import os 
+
 def keystone_right_check(keystone_right) : 
     keystone_right = keystone_right.split("\n")
     if "keystone" in keystone_right[0] : 
@@ -124,8 +126,16 @@ def keystone_ower_check(keystone_ower) :
 
 def keystone_conf_check():
     max_request = {
-            "status" : {},
-            "data" : {}
+        "status" : {},
+        "data" : {}
+    }
+    admin_token = {
+        "status" : {},
+        "data" : {}
+    }
+    provider = {
+        "status" : {},
+        "data" : {}
     }
     conf = open("/etc/keystone/keystone.conf", 'r')
     lines = conf.readlines()
@@ -146,9 +156,11 @@ def keystone_conf_check():
         elif check == 1 :
             line = line.replace(' ', "").lower()
             if 'provider=fernet' in line :
-                print("provider")
-            elif 'provider=fernte' not in line :
-                print("provider None setting")
+                provider['status'] = 0
+                provider['data'] = line.split("\n")[0]
+            elif 'provider=fernet' not in line :
+                provider['status']=2
+                provider['data'] = line.split("\n")[0]
             if 'hash_algorithm=sha256' in line :
                 print("hash_algorithm")
             elif 'hash_algorithm=sha256' not in line :
@@ -159,34 +171,42 @@ def keystone_conf_check():
             line = line.replace(' ', "")
             if 'max_request_body_size=114688' in line :
                 max_request['status']=0
-                max_request['data']= line.split("\n")[0]
+                max_request['data'] = line.split("\n")[0]
             elif 'max_request_body_size' not in line :
-                print("max_request_body None setting")
+                max_request['status']=2
+                max_request['data'] = "None"
             check = ""
 
         elif check == 3 :
             line = line.replace(' ', "")
             if 'admin_token=<None>' in line :
-                print("admin_token")
+                admin_token['status'] = 0
+                admin_token['data'] = line.split("\n")[0]
             elif 'admin_token=<None>' not in line :
-                print("admin None setting")
+                admin_token['status']=2
+                admin_token['data'] = "None"
+
             check = ""
         else :
             pass
 
     data = {
-         "2.1.4.9" : max_request
+         "2.1.4.9" : max_request,
+         "2.1.4.13" : admin_token,
+         "2.1.4.15" : provider
     }
-def keystone_checklist() :
-#    result = subprocess.run(["./keystone_ower_check.sh"], stdout=subprocess.PIPE)
-#    result2 = subprocess.run(["./keystone_right_check.sh"], stdout=subprocess.PIPE)
+    return data
+def keystone_checklist(path) :
+
+    path = os.path.dirname(os.path.abspath(__file__))
+#    result = subprocess.run([path + "/keystone_ower_check.sh"], stdout=subprocess.PIPE)
+#    result2 = subprocess.run([path + "/keystone_right_check.sh"], stdout=subprocess.PIPE)
 #    keystone_ower = result.stdout.decode("UTF-8")
 #    keystone_right = result2.stdout.decode("UTF-8")
 
-    keystone_conf_check()    
 #    keystone_right_check(keystone_right)
 #    keystone_ower_check(keystone_ower)
-keystone_checklist()
+    keystone_checklist = keystone_conf_check()
+    return keystone_checklist
 
-#keystone_checklist()
  

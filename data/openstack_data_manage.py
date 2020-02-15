@@ -1,6 +1,6 @@
 import requests
 import os
-from data.compute.compute_data import get_compute_data
+from data.compute.compute_data import openstack_compute_data
 from data.terraform_openstack.openstack_terraform import Terraform
 
 def create_credentials_token(key) :
