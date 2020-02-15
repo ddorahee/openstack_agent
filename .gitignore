@@ -1,0 +1,6 @@
+## Openstack Git Ignore ##
+
+.terraform
+./terraform
+
+
