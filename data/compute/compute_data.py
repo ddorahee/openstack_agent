@@ -32,7 +32,6 @@ def openstack_compute_data(path, key, OS_TOKEN) :
     make_compute_terraform(path)
     openstack_compute_terraform(path)
     instance_res = create_compute_data(key, OS_TOKEN, "8774/v2.1/servers/detail")
-    print(instance_res)
 
     terraform_data = Terraform.get_tfstate(path)
     terraform_data = json.loads(terraform_data)
