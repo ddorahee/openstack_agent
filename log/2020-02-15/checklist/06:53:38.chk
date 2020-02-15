@@ -1,0 +1,1 @@
+{'cloud_name': 'test_openstack', 'vendor': 'openstack', 'time': '2020-02-15_06:53:38', 'checklist': {'compute': [], 'iam': [{'2.1.4.9': {'status': 0, 'data': 'max_request_body_size=114688'}, '2.1.4.13': {'status': 0, 'data': 'admin_token=<None>'}, '2.1.4.15': {'status': 0, 'data': 'provider=fernet'}}], 'network': [], 'storage': [], 'database': []}}

@@ -25,8 +25,17 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             content_len = int(self.headers.get('Content-Length'))
             post_body = self.rfile.read(content_len)
             body = ast.literal_eval(post_body.decode('utf-8'))
+            time = self.get_now_time_string()
+
  
             if resource == "data" : 
+                if not(os.path.isdir(path + "/" + time.split("_")[0])) :
+                    os.makedirs(os.path.join(path + "/" + time.split("_")[0]))
+                    print("mkdir" + path + "/" + time.split("_")[0])
+                if not(os.path.isdir(path + "/" + time.split("_")[0] + "/data")) :
+                    os.makedirs(os.path.join(path + "/" + time.split("_")[0] + "/data"))
+                    print("mkdir" + path + "/" + time.split("_")[0] + "/data")
+
                 openstack_data = openstack_data_all(body)
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
@@ -36,15 +45,20 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             elif resource == "checklist" :
                 path = os.path.dirname(os.path.abspath(__file__)) + "/log"
                 openstack_checklist = openstack_check_all_file()
-
                 checklist = {
                    'cloud_name': body['cloud_name'],
                    'vendor': body['vendor'],
-                   'time': self.get_now_time_string(),
+                   'time': time,
                    'checklist': openstack_checklist
                 }
-
-                checklist_file = open(path + '/' + self.get_now_time_string() + '.chk', 'w')
+                if not(os.path.isdir(path + "/" + time.split("_")[0])) : 
+                    os.makedirs(os.path.join(path + "/" + time.split("_")[0]))
+                    print("mkdir" + path + "/" + time.split("_")[0])
+                if not(os.path.isdir(path + "/" + time.split("_")[0] + "/checklist")) :
+                    os.makedirs(os.path.join(path + "/" + time.split("_")[0] + "/checklist"))
+                    print("mkdir" + path + "/" + time.split("_")[0] + "/checklist")
+                
+                checklist_file = open(path + '/' + time.split("_")[0] + '/checklist/' + time.split("_")[1] + '.chk', 'w')
                 checklist_file.write(str(checklist))
                 checklist_file.close()
                 self.send_response(200)
