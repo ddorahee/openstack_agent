@@ -12,27 +12,24 @@ def set_request(key, OS_TOKEN,PORT):
     except Exception as ex:
         print(ex)
 
-def openstack_compute_terraform(path):
+def make_network_terraform(path, network_list) : 
+    pass
+
+def openstack_compute_terraform(path, network_list):
+    make_network_terrafrom(path, network_list)
     Terraform.terraform_init(path)
     Terraform.terraform_plan(path)
     Terraform.terraform_apply(path)
-
-def make_compute_terraform(path):
-    tf = open(path + "tf.tfstate", 'w')
-    data = '{ \n\t "version": 4, \n\t "terraform_version": "0.12.18",\n\t "serial": 4, \n\t "lineage": "c26695ac-9e77-5e65-36c9-1fd92a2a7592", \n\t "outputs": {}, \n\t "resources": []\n}'
-    tf.write(data)
-    tf.close()
 
 def create_compute_data(key, OS_TOKEN, PORT) :
     compute_datas = set_request(key, OS_TOKEN, PORT)
 
     return compute_datas
     
-def openstack_compute_data(path, key, OS_TOKEN) :
+def openstack_network_data(path, key, OS_TOKEN) :
     make_compute_terraform(path)
     openstack_compute_terraform(path)
     instance_res = create_compute_data(key, OS_TOKEN, "8774/v2.1/servers/detail")
-    print(instance_res)
 
     terraform_data = Terraform.get_tfstate(path)
     terraform_data = json.loads(terraform_data)

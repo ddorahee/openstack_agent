@@ -1,7 +1,7 @@
 import subprocess
 
 def horizon_checkfile() :
-    result = subprocess.run(["./horizon_right_check.sh"], stdout=subprocess.PIPE)
+    result = subprocess.run(["./horizon_conf_check.sh"], stdout=subprocess.PIPE)
     horizon_conf = result.stdout.decode("UTF-8")
     horizon_conf = horizon_conf.upper().replace(" ", "") 
     if "#DISALLOW_IFRAME_EMBED=TRUE" in horizon_conf :

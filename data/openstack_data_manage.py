@@ -30,8 +30,9 @@ def openstack_data_all(key) :
 
     print("Complete terraform openstack provider")
     print("Get Compute Data")
-    compute = get_compute_data(path + "compute/",key, OS_TOKEN)
+    compute = openstack_compute_data(path + "compute/",key, OS_TOKEN)
     print("Complete Compute Data")
-    
+   
+
     return compute
 
