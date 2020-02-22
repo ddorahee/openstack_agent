@@ -26,6 +26,8 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             post_body = self.rfile.read(content_len)
             body = ast.literal_eval(post_body.decode('utf-8'))
             time = self.get_now_time_string()
+            path = os.path.dirname(os.path.abspath(__file__)) + "/log"
+
 
  
             if resource == "data" : 
@@ -43,7 +45,6 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(str(openstack_data).encode())
 
             elif resource == "checklist" :
-                path = os.path.dirname(os.path.abspath(__file__)) + "/log"
                 openstack_checklist = openstack_check_all_file()
                 checklist = {
                    'cloud_name': body['cloud_name'],

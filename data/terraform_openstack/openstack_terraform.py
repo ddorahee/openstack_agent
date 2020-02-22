@@ -9,7 +9,7 @@ class Terraform:
         try :
             provider = open(path + "provider.tf", 'w')
             content = 'provider "openstack" {\n\t auth_url = "%s" \n\t token = "%s"\n\t \n}' % \
-                        (key['OS_AUTH_URL']+"5000", OS_TOKEN)
+                        (key['OS_AUTH_URL']+":5000", OS_TOKEN)
             provider.write(content)
             provider.close()
             return True

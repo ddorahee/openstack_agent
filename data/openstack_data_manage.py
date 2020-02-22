@@ -1,6 +1,7 @@
 import requests
 import os
 from data.compute.compute_data import openstack_compute_data
+from data.network.network_data import openstack_network_data
 from data.terraform_openstack.openstack_terraform import Terraform
 
 def create_credentials_token(key) :
@@ -32,7 +33,11 @@ def openstack_data_all(key) :
     print("Get Compute Data")
     compute = openstack_compute_data(path + "compute/",key, OS_TOKEN)
     print("Complete Compute Data")
+    print("Get Network Data")
+    network = openstack_network_data(path + "network/", key, OS_TOKEN)
+    print("Complete Network Data")
    
+    compute['resources'] += network['resources']
 
     return compute
 
