@@ -83,7 +83,7 @@ def neutron_conf_check(neutron_conf):
 def neutron_checklist(path) :
 #    result = subprocess.run([path + "./neutron_ower_check.sh"], stdout=subprocess.PIPE)
 #    result2 = subprocess.run([path + "./neutron_right_check.sh"], stdout=subprocess.PIPE)
-    result3 = subprocess.run(["./neutron_conf_check.sh"], stdout=subprocess.PIPE)
+    result3 = subprocess.run([path + "./neutron_conf_check.sh"], stdout=subprocess.PIPE)
 #    neutron_ower = result.stdout.decode("UTF-8")
 #    neutron_ower_check(neutron_ower)
 
@@ -92,6 +92,5 @@ def neutron_checklist(path) :
 
 #    neutron_right = result2.stdout.decode("UTF-8")
 #    neutron_right_check(neutron_right)
-neutron_checklist("a")
 
 
